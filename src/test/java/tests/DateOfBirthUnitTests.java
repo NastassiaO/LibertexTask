@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DateUnitTests {
+public class DateOfBirthUnitTests {
     @DataProvider(name = "User has 18th")
     public Object[] userHas18thTodayData() {
         LocalDate now = LocalDate.now();

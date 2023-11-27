@@ -26,6 +26,47 @@ public class DateUtils {
 
 
     /**
+     * Method verify if user with such date of birth is over 18th years old.
+     * @param dateInStr - date in any string format
+     * @return boolean value if date is more or equal 18
+     * @throws RuntimeException
+     */
+    public static boolean isUserOver18(String dateInStr) throws RuntimeException {
+        long age = getAge(dateInStr);
+        logger.info( "Age is " + age);
+        return age >= 18;
+    }
+
+    public static List<String> generateToListOfDates(LocalDate localDate) {
+        Date date = java.sql.Date.valueOf(localDate);
+        List<String> results = new ArrayList<>();
+        for (String p : DateUtils.getDatesFormats()) {
+            results.add(DateUtils.generateDateInFormat(date, p));
+        }
+        return results;
+    }
+
+    public static long getAge(String dateOfBirth){
+        Date dateIn = parseToDate(dateOfBirth);
+        return DateUtils.getDifferenceInYears(dateIn, new Date());
+    }
+
+
+    /**
+     * @param dateFormat   - format of date
+     * @param dateInString - date in String format
+     * @return Date or null if can't parse
+     */
+    private static Date tryToParceToDate(String dateFormat, String dateInString) {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
+        formatter.setLenient(false);
+        try {
+            return formatter.parse(dateInString);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+    /**
      * @param dateInString - date in string format
      * @return Date or null if date format wasn't identified
      */
@@ -51,39 +92,5 @@ public class DateUtils {
     private static String generateDateInFormat(Date date, String pattern) {
         SimpleDateFormat df = new SimpleDateFormat(pattern);
         return df.format(date);
-    }
-
-    public static List<String> generateToListOfDates(LocalDate localDate) {
-        Date date = java.sql.Date.valueOf(localDate);
-        List<String> results = new ArrayList<>();
-        for (String p : DateUtils.getDatesFormats()) {
-            results.add(DateUtils.generateDateInFormat(date, p));
-        }
-        return results;
-    }
-
-    public static long getAge(String dateOfBirth){
-        Date dateIn = parseToDate(dateOfBirth);
-        return DateUtils.getDifferenceInYears(dateIn, new Date());
-    }
-    public static boolean isUserOver18(String dateInStr) throws RuntimeException {
-        long age = getAge(dateInStr);
-        logger.info( "Age is " + age);
-        return age >= 18;
-    }
-
-    /**
-     * @param dateFormat   - format of date
-     * @param dateInString - date in String format
-     * @return Date or null if can't parse
-     */
-    private static Date tryToParceToDate(String dateFormat, String dateInString) {
-        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
-        formatter.setLenient(false);
-        try {
-            return formatter.parse(dateInString);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 }
