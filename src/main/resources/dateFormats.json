@@ -1,0 +1,16 @@
+{
+  "formats": [
+    "yyyy-MM-dd",
+    "MM/dd/yyyy",
+    "dd-MM-yyyy",
+    "yyyyMMdd",
+    "MMMM d, yyyy",
+    "yyyy/MM/dd",
+    "yyyy.MM.dd",
+    "yyyy/MM/dd",
+    "dd/MM/yyyy",
+    "dd.MM.yyyy",
+    "MMMM dd, yyyy"
+  ]
+}
+
