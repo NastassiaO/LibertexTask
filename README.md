@@ -30,6 +30,8 @@ src
 - build.gradle.kts - contains all libs and run settings
 # Installation and Test Execution
 gradle test --tests DateOfBirthUnitTests
+# Test results
+$buildDir/test-output/index.html
 
 
   
